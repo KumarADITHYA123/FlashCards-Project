@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
@@ -313,6 +313,9 @@ const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reviewMode, setReviewMode] = useState<"study" | "quiz">("study");
+  const [feedback, setFeedback] = useState<{ type: Confidence | null, key: number }>({ type: null, key: 0 });
+  const [studyFeedback, setStudyFeedback] = useState<{ show: boolean, key: number }>({ show: false, key: 0 });
+  const flipTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (selectedLanguage) {
@@ -356,45 +359,52 @@ const Flashcards = () => {
 
   const handleFlipCard = () => {
     setIsFlipped(!isFlipped);
+    if (!isFlipped && reviewMode === "study") {
+      setStudyFeedback({ show: true, key: Date.now() });
+      if (flipTimeout.current) clearTimeout(flipTimeout.current);
+      flipTimeout.current = setTimeout(() => {
+        setIsFlipped(false);
+        setStudyFeedback({ show: false, key: 0 });
+      }, 4000);
+    }
   };
 
   const handleUpdateConfidence = (confidence: Confidence) => {
-    if (flashcards.length > 0) {
-      const updatedFlashcards = [...flashcards];
-      const card = { ...updatedFlashcards[currentCardIndex] };
-      
-      card.confidence = confidence;
-      card.lastReviewed = new Date();
-      card.reviewCount += 1;
-      
-      // Set next review date based on confidence
-      const now = new Date();
-      if (confidence === "high") {
-        // Review in 7 days
-        card.nextReviewDate = new Date(now.setDate(now.getDate() + 7));
-      } else if (confidence === "medium") {
-        // Review in 3 days
-        card.nextReviewDate = new Date(now.setDate(now.getDate() + 3));
-      } else {
-        // Review tomorrow
-        card.nextReviewDate = new Date(now.setDate(now.getDate() + 1));
-      }
-      
-      updatedFlashcards[currentCardIndex] = card;
-      setFlashcards(updatedFlashcards);
-      
-      toast({
-        title: `Confidence set to ${confidence}`,
-        description: "We'll adjust your review schedule accordingly."
-      });
-      
-      // Move to next card
-      setTimeout(() => {
-        if (currentCardIndex < flashcards.length - 1) {
-          handleNextCard();
+    setFeedback({ type: confidence, key: Date.now() });
+    setIsFlipped(true); // Show answer side
+    if (flipTimeout.current) clearTimeout(flipTimeout.current);
+    flipTimeout.current = setTimeout(() => {
+      setIsFlipped(false); // Flip back after 2 seconds
+      setFeedback({ type: null, key: 0 });
+      if (flashcards.length > 0) {
+        const updatedFlashcards = [...flashcards];
+        const card = { ...updatedFlashcards[currentCardIndex] };
+        card.confidence = confidence;
+        card.lastReviewed = new Date();
+        card.reviewCount += 1;
+        // Set next review date based on confidence
+        const now = new Date();
+        if (confidence === "high") {
+          card.nextReviewDate = new Date(now.setDate(now.getDate() + 7));
+        } else if (confidence === "medium") {
+          card.nextReviewDate = new Date(now.setDate(now.getDate() + 3));
+        } else {
+          card.nextReviewDate = new Date(now.setDate(now.getDate() + 1));
         }
-      }, 1000);
-    }
+        updatedFlashcards[currentCardIndex] = card;
+        setFlashcards(updatedFlashcards);
+        toast({
+          title: `Confidence set to ${confidence}`,
+          description: "We'll adjust your review schedule accordingly."
+        });
+        // Move to next card after flip back
+        setTimeout(() => {
+          if (currentCardIndex < flashcards.length - 1) {
+            setCurrentCardIndex(currentCardIndex + 1);
+          }
+        }, 350); // Small delay to allow flip animation before next card
+      }
+    }, 2000);
   };
 
   const resetDeck = () => {
@@ -405,6 +415,12 @@ const Flashcards = () => {
       description: "Starting from the first card."
     });
   };
+
+  useEffect(() => {
+    return () => {
+      if (flipTimeout.current) clearTimeout(flipTimeout.current);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-dark-900">
@@ -541,7 +557,53 @@ const Flashcards = () => {
                             <p className="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
                               {flashcards[currentCardIndex].answer}
                             </p>
-                            
+                            {/* Study mode emoji feedback */}
+                            <AnimatePresence mode="wait">
+                              {reviewMode === "study" && studyFeedback.show && (
+                                <motion.div
+                                  key={studyFeedback.key}
+                                  initial={{ opacity: 0, y: 30, scale: 0.7 }}
+                                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                                  exit={{ opacity: 0, y: -30, scale: 0.7 }}
+                                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                  className="flex flex-col items-center justify-center my-6"
+                                >
+                                  <span className="text-5xl animate-bounce">👀</span>
+                                  <span className="mt-2 text-lg font-semibold text-center text-gray-800 dark:text-white">
+                                    Nice! Keep going!
+                                  </span>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                            {/* Emoji Feedback - now centered below answer */}
+                            <AnimatePresence mode="wait">
+                              {reviewMode === "quiz" && feedback.type && (
+                                <motion.div
+                                  key={feedback.key}
+                                  initial={{ opacity: 0, y: 30, scale: 0.7 }}
+                                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                                  exit={{ opacity: 0, y: -30, scale: 0.7 }}
+                                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                  className="flex flex-col items-center justify-center my-6"
+                                >
+                                  {feedback.type === "high" && (
+                                    <span className="text-5xl animate-bounce">🎉</span>
+                                  )}
+                                  {feedback.type === "medium" && (
+                                    <span className="text-5xl animate-bounce">👏</span>
+                                  )}
+                                  {feedback.type === "low" && (
+                                    <span className="text-5xl">📚</span>
+                                  )}
+                                  <span className="mt-2 text-lg font-semibold text-center text-gray-800 dark:text-white">
+                                    {feedback.type === "high" && "Haee!"}
+                                    {feedback.type === "medium" && "Very Good!"}
+                                    {feedback.type === "low" && "Learning makes man perfect!"}
+                                  </span>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                            {/* Quiz mode buttons remain below */}
                             {reviewMode === "quiz" && (
                               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 mt-8">
                                 <Button 

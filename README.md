@@ -30,11 +30,14 @@ Users should be able to:
 
 ### Screenshots
 
-[Add your project screenshots here]
+![Home Page](public/screen shorts/Screenshot 2025-05-18 003556.png)
+![Flashcards Decks](public/screen shorts/Screenshot 2025-05-18 003744.png)
+![Quiz Mode](public/screen shorts/Screenshot 2025-05-18 003817.png)
+![Progress and Features](public/screen shorts/Screenshot 2025-05-18 004120.png)
 
 ### Links
 
-- Live Site URL: [Add your live site URL here]
+- Live Site: [Live URL](https://flashcards-project123.netlify.app/)
 
 ## My Process
 
@@ -100,7 +103,6 @@ const FlashCard: React.FC<CardProps> = ({ title, content, onFlip }) => {
 ## Author
 
 - **Name**: B Kumar Adithya
-- GitHub: [https://github.com/KumarADITHYA123](https://github.com/KumarADITHYA123)
-- LinkedIn: [https://www.linkedin.com/in/kumar-adithya-bathula-66294b2b2/](https://www.linkedin.com/in/kumar-adithya-bathula-66294b2b2/)
-
----
+- **Email**: kumaradithyabathula@gmail.com
+- GitHub: [GitHub](https://github.com/KumarADITHYA123)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kumar-adithya-bathula-66294b2b2/)

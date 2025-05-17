@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -68,8 +67,8 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="nav-link dark:text-gray-300 dark:hover:text-white" onClick={scrollToTop}>Home</Link>
-          <Link to="/flashcards" className="nav-link dark:text-gray-300 dark:hover:text-white">Flashcards</Link>
+          <Link to="/" className="nav-link dark:text-white dark:hover:text-white" onClick={scrollToTop}>Home</Link>
+          <Link to="/flashcards" className="nav-link dark:text-white dark:hover:text-white">Flashcards</Link>
           <div className="flex items-center">
             <ThemeToggle />
           </div>
@@ -79,7 +78,7 @@ const Navbar = () => {
         <div className="md:hidden flex items-center space-x-2">
           <ThemeToggle />
           <button 
-            className="text-gray-700 dark:text-gray-300 p-3 focus:outline-none" 
+            className="text-gray-700 dark:text-white p-3 focus:outline-none" 
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
