@@ -14,6 +14,13 @@ A modern, responsive flashcard application built with React and TypeScript, feat
   - [Future Improvements](#future-improvements)
   - [Resources](#resources)
 
+## Author
+
+- **Name**: B Kumar Adithya
+- **Email**: kumaradithyabathula@gmail.com
+- GitHub: [KumarADITHYA123](https://github.com/KumarADITHYA123)
+- LinkedIn: [Kumar Adithya Bathula](https://www.linkedin.com/in/kumar-adithya-bathula-66294b2b2/)
+
 ## Overview
 
 ### The Challenge
