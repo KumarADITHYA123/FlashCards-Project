@@ -27,7 +27,7 @@ const AppRoutes = () => {
     if (location.pathname === "/flashcards") {
       document.title = "Flashcards";
     } else {
-      document.title = "Learn AI";
+      document.title = "Flashcards";
     }
   }, [location.pathname]);
 
