@@ -78,7 +78,7 @@ const HumanoidSection = () => {
     <div 
       ref={sectionRef} 
       className="relative" 
-      style={{ height: '200vh' }} // Reduced from 300vh since we only have 2 cards now
+      style={{ height: '250vh' }} // Changed from 300vh to 250vh for better slide effect
     >
       <section className="w-full h-screen py-10 md:py-16 sticky top-0 overflow-hidden bg-white dark:bg-dark-800" id="why-humanoid">
         <div className="container px-6 lg:px-8 mx-auto h-full flex flex-col">

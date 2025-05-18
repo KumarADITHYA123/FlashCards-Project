@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import LottieAnimation from "./LottieAnimation";
 import { Link } from "react-router-dom";
+import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -113,14 +114,28 @@ const Hero = () => {
               className="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight opacity-0 animate-fade-in text-gray-800 dark:text-gray-800" 
               style={{ animationDelay: "0.3s" }}
             >
-              Master Programming<br className="hidden sm:inline" />with Smart Flashcards
+              <Typewriter
+                words={["Master Programming with Smart Flashcards"]}
+                loop={1}
+                cursor={false}
+                typeSpeed={60}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
             </h1>
             
             <p 
               style={{ animationDelay: "0.5s" }} 
               className="section-subtitle mt-3 sm:mt-6 mb-4 sm:mb-8 leading-relaxed opacity-0 animate-fade-in text-gray-900 dark:text-gray-900 font-normal text-base sm:text-lg text-left"
             >
-              Learn smarter with Flashcards. Interactive, topic-wise questions to help you master programming languages effectively.
+              <Typewriter
+                words={["Learn smarter with Flashcards. Interactive, topic-wise questions to help you master programming languages effectively."]}
+                loop={1}
+                cursor={false}
+                typeSpeed={40}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
             </p>
             
             <div 
