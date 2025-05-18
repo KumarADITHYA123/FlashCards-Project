@@ -25,7 +25,7 @@ const AppRoutes = () => {
   useEffect(() => {
     // Update document title based on current route
     if (location.pathname === "/flashcards") {
-      document.title = "Flashcards | Learn AI";
+      document.title = "Flashcards";
     } else {
       document.title = "Learn AI";
     }
