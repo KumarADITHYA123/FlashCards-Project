@@ -107,7 +107,7 @@ const Hero = () => {
               style={{ animationDelay: "0.1s" }}
             >
               <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white mr-2">01</span>
-              <span className="text-pulse-500">Purpose</span>
+              <span className="text-black">Purpose</span>
             </div>
             
             <h1 

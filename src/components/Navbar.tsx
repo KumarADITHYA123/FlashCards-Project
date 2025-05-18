@@ -57,77 +57,39 @@ const Navbar = () => {
           to="/" 
           className="flex items-center space-x-2"
           onClick={scrollToTop}
-          aria-label="Learn AI"
+          aria-label="Pulse Robot"
         >
-          <img 
-            src="/logo.svg" 
-            alt="Learn AI Logo" 
-            className="h-7 sm:h-8" 
-          />
+          <svg
+            className="h-8 w-8 text-black dark:text-orange-400"
+            viewBox="0 0 32 32"
+            fill="currentColor"
+            aria-label="Pulse Robot Logo"
+          >
+            <path d="M16 2c1.1 0 2 0.9 2 2v3.06c1.13-0.19 2.3-0.06 3.36 0.41l1.53-2.65c0.55-0.95 1.77-1.27 2.72-0.72s1.27 1.77 0.72 2.72l-1.53 2.65c0.9 0.77 1.66 1.7 2.19 2.77l2.65-1.53c0.95-0.55 2.17-0.23 2.72 0.72s0.23 2.17-0.72 2.72l-2.65 1.53c0.47 1.06 0.6 2.23 0.41 3.36h3.06c1.1 0 2 0.9 2 2s-0.9 2-2 2h-3.06c0.19 1.13 0.06 2.3-0.41 3.36l2.65 1.53c0.95 0.55 1.27 1.77 0.72 2.72s-1.77 1.27-2.72 0.72l-2.65-1.53c-0.53 1.07-1.29 2-2.19 2.77l1.53 2.65c0.55 0.95 0.23 2.17-0.72 2.72s-2.17 0.23-2.72-0.72l-1.53-2.65c-1.06 0.47-2.23 0.6-3.36 0.41v3.06c0 1.1-0.9 2-2 2s-2-0.9-2-2v-3.06c-1.13 0.19-2.3 0.06-3.36-0.41l-1.53 2.65c-0.55 0.95-1.77 1.27-2.72 0.72s-1.27-1.77-0.72-2.72l1.53-2.65c-0.9-0.77-1.66-1.7-2.19-2.77l-2.65 1.53c-0.95 0.55-2.17 0.23-2.72-0.72s-0.23-2.17 0.72-2.72l2.65-1.53c-0.47-1.06-0.6-2.23-0.41-3.36h-3.06c-1.1 0-2-0.9-2-2s0.9-2 2-2h3.06c-0.19-1.13-0.06-2.3 0.41-3.36l-2.65-1.53c-0.95-0.55-1.27-1.77-0.72-2.72s1.77-1.27 2.72-0.72l2.65 1.53c0.53-1.07 1.29-2 2.19-2.77l-1.53-2.65c-0.55-0.95-0.23-2.17 0.72-2.72s2.17-0.23 2.72 0.72l1.53 2.65c1.06-0.47 2.23-0.6 3.36-0.41v-3.06c0-1.1 0.9-2 2-2zm0 8a6 6 0 100 12 6 6 0 000-12z" />
+          </svg>
           <span className={cn(
             "text-lg font-medium text-gray-900",
-            isFlashcardsPage ? "dark:text-white" : "dark:text-black"
+            "dark:text-orange-400"
           )}>Learn AI</span>
         </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <div className="flex items-center space-x-8">
           <Link to="/" className={cn(
             "nav-link",
-            isFlashcardsPage ? "dark:text-white dark:hover:text-white" : "dark:text-black dark:hover:text-black"
+            "dark:text-orange-400 dark:hover:text-orange-400"
           )} onClick={scrollToTop}>Home</Link>
           <Link to="/flashcards" className={cn(
             "nav-link",
-            isFlashcardsPage ? "dark:text-white dark:hover:text-white" : "dark:text-black dark:hover:text-black"
+            "dark:text-orange-400 dark:hover:text-orange-400"
           )}>Flashcards</Link>
-          <div className="flex items-center">
-            <ThemeToggle />
-          </div>
-        </nav>
-
-        {/* Mobile menu button - increased touch target */}
-        <div className="md:hidden flex items-center space-x-2">
           <ThemeToggle />
           <button 
-            className="text-gray-700 dark:text-white p-3 focus:outline-none" 
+            className="text-gray-700 dark:text-white p-3 focus:outline-none md:hidden" 
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </div>
-
-      {/* Mobile Navigation - improved for better touch experience */}
-      <div className={cn(
-        "fixed inset-0 z-40 bg-white dark:bg-dark-900 flex flex-col pt-16 px-6 md:hidden transition-all duration-300 ease-in-out",
-        isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"
-      )}>
-        <nav className="flex flex-col space-y-8 items-center mt-8">
-          <Link 
-            to="/" 
-            className={cn(
-              "text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800",
-              isFlashcardsPage ? "dark:text-white" : "dark:text-black"
-            )}
-            onClick={() => {
-              scrollToTop();
-              closeMenu();
-            }}
-          >
-            Home
-          </Link>
-          <Link 
-            to="/flashcards" 
-            className={cn(
-              "text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800",
-              isFlashcardsPage ? "dark:text-white" : "dark:text-black"
-            )}
-            onClick={closeMenu}
-          >
-            Flashcards
-          </Link>
-        </nav>
       </div>
     </header>
   );

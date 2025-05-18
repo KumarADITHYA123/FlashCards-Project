@@ -525,7 +525,8 @@ const Flashcards = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
+                        style={{ willChange: 'transform, opacity' }}
                         className="w-full h-full"
                       >
                         <Card
@@ -565,7 +566,8 @@ const Flashcards = () => {
                                   initial={{ opacity: 0, y: 30, scale: 0.7 }}
                                   animate={{ opacity: 1, y: 0, scale: 1 }}
                                   exit={{ opacity: 0, y: -30, scale: 0.7 }}
-                                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                  transition={{ type: "spring", stiffness: 250, damping: 25 }}
+                                  style={{ willChange: 'transform, opacity' }}
                                   className="flex flex-col items-center justify-center my-6"
                                 >
                                   <span className="text-5xl animate-bounce">👀</span>
@@ -583,7 +585,8 @@ const Flashcards = () => {
                                   initial={{ opacity: 0, y: 30, scale: 0.7 }}
                                   animate={{ opacity: 1, y: 0, scale: 1 }}
                                   exit={{ opacity: 0, y: -30, scale: 0.7 }}
-                                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                  transition={{ type: "spring", stiffness: 250, damping: 25 }}
+                                  style={{ willChange: 'transform, opacity' }}
                                   className="flex flex-col items-center justify-center my-6"
                                 >
                                   {feedback.type === "high" && (
