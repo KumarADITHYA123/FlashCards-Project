@@ -30,10 +30,10 @@ Users should be able to:
 
 ### Screenshots
 
-![Home Page](public/screen shorts/Screenshot 2025-05-18 003556.png)
-![Flashcards Decks](public/screen shorts/Screenshot 2025-05-18 003744.png)
-![Quiz Mode](public/screen shorts/Screenshot 2025-05-18 003817.png)
-![Progress and Features](public/screen shorts/Screenshot 2025-05-18 004120.png)
+![](./public/screen%20shorts/Screenshot%202025-05-18%20003556.png)
+![](./public/screen%20shorts/Screenshot%202025-05-18%20003744.png)
+![](./public/screen%20shorts/Screenshot%202025-05-18%20003817.png)
+![](./public/screen%20shorts/Screenshot%202025-05-18%20004120.png)
 
 ### Links
 

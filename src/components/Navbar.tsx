@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isFlashcardsPage = location.pathname === "/flashcards";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,13 +64,22 @@ const Navbar = () => {
             alt="Learn AI Logo" 
             className="h-7 sm:h-8" 
           />
-          <span className="text-lg font-medium text-gray-900 dark:text-white">Learn AI</span>
+          <span className={cn(
+            "text-lg font-medium text-gray-900",
+            isFlashcardsPage ? "dark:text-white" : "dark:text-black"
+          )}>Learn AI</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="nav-link dark:text-white dark:hover:text-white" onClick={scrollToTop}>Home</Link>
-          <Link to="/flashcards" className="nav-link dark:text-white dark:hover:text-white">Flashcards</Link>
+          <Link to="/" className={cn(
+            "nav-link",
+            isFlashcardsPage ? "dark:text-white dark:hover:text-white" : "dark:text-black dark:hover:text-black"
+          )} onClick={scrollToTop}>Home</Link>
+          <Link to="/flashcards" className={cn(
+            "nav-link",
+            isFlashcardsPage ? "dark:text-white dark:hover:text-white" : "dark:text-black dark:hover:text-black"
+          )}>Flashcards</Link>
           <div className="flex items-center">
             <ThemeToggle />
           </div>
@@ -95,7 +106,10 @@ const Navbar = () => {
         <nav className="flex flex-col space-y-8 items-center mt-8">
           <Link 
             to="/" 
-            className="text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800" 
+            className={cn(
+              "text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800",
+              isFlashcardsPage ? "dark:text-white" : "dark:text-black"
+            )}
             onClick={() => {
               scrollToTop();
               closeMenu();
@@ -105,7 +119,10 @@ const Navbar = () => {
           </Link>
           <Link 
             to="/flashcards" 
-            className="text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800" 
+            className={cn(
+              "text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800",
+              isFlashcardsPage ? "dark:text-white" : "dark:text-black"
+            )}
             onClick={closeMenu}
           >
             Flashcards
