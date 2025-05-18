@@ -166,7 +166,7 @@ const Hero = () => {
                   ref={imageRef} 
                   src="/images/af412c03-21e4-4856-82ff-d1a975dc84a9.png" 
                   alt="Learn AI Assistant" 
-                  className="w-full h-auto object-cover transition-transform duration-500 ease-out" 
+                  className="w-full h-auto object-cover transition-transform duration-500 ease-out hover:scale-105 hover:rotate-3 hover:shadow-2xl cursor-pointer" 
                   style={{ transformStyle: 'preserve-3d' }} 
                 />
                 <div className="absolute inset-0" style={{ backgroundImage: 'url("/hero-image.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', mixBlendMode: 'overlay', opacity: 0.5 }}></div>
