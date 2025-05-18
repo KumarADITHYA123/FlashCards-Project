@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Flashcards from "./pages/Flashcards";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { useEffect } from "react";
+import FloatingFooter from "./components/Footer";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -50,6 +51,7 @@ const App = () => (
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
+        <FloatingFooter />
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
