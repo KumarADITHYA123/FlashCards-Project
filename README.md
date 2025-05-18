@@ -13,7 +13,6 @@ A modern, responsive flashcard application built with React and TypeScript, feat
   - [What I Learned](#what-i-learned)
   - [Future Improvements](#future-improvements)
   - [Resources](#resources)
-- [Author](#author)
 
 ## Overview
 
@@ -100,10 +99,3 @@ const FlashCard: React.FC<CardProps> = ({ title, content, onFlip }) => {
 - [Vite Documentation](https://vitejs.dev/)
 
 ---
-
-## Author
-
-- **Name**: B Kumar Adithya
-- **Email**: kumaradithyabathula@gmail.com
-- GitHub: [GitHub](https://github.com/KumarADITHYA123)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kumar-adithya-bathula-66294b2b2/)
